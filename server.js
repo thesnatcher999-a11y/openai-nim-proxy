@@ -41,6 +41,15 @@ app.get('/health', (req, res) => {
   });
 });
 
+// Root endpoint – helps Janitor AI verify the proxy is alive
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'OpenAI to NVIDIA NIM Proxy is running. Use /v1/chat/completions for requests.',
+   health: '/health',
+   models: '/v1/models'
+  });
+});
+
 // List models endpoint (OpenAI compatible)
 app.get('/v1/models', (req, res) => {
   const models = Object.keys(MODEL_MAPPING).map(model => ({
